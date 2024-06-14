@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Hotel Booking System</h1>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#register">Register</a>
+            <a href="#profile">Profile</a>
+            <a href="#bookRoom">Book a Room</a>
+            <a href="#history">Booking History</a>
+            <a href="#availability">Check Availability</a>
+            <a href="#admin">Admin Panel</a>
+            <a href="#about">About Us</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home">
+            <h2>Welcome to Our Hotel</h2>
+            <p>Experience the luxury and comfort of our premium rooms.</p>
+        </section>
+
+        <!-- Registration Section -->
+        <section id="register">
+            <h2>Register</h2>
+            <form id="registerForm" method="post" action="/register">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Register</button>
+            </form>
+        </section>
+
+        <!-- Profile Section -->
+        <section id="profile">
+            <h2>Your Profile</h2>
+            <form id="profileForm" method="post" action="/profile">
+                <label for="username">Username:</label>
+                <input type="text" id="profileUsername" name="username" required readonly>
+                <label for="email">Email:</label>
+                <input type="email" id="profileEmail" name="email" required>
+                <label for="password">Password:</label>
+                <input type="password" id="profilePassword" name="password">
+                <button type="submit">Update Profile</button>
+            </form>
+        </section>
+
+        <!-- Room Booking Section -->
+        <section id="bookRoom">
+            <h2>Book a Room</h2>
+            <form id="bookRoomForm" method="post" action="/book">
+                <label for="roomType">Room Type:</label>
+                <select id="roomType" name="roomType" required>
+                    <option value="single">Single</option>
+                    <option value="double">Double</option>
+                    <option value="suite">Suite</option>
+                    <option value="deluxe">Deluxe</option>
+                </select>
+                <label for="checkInDate">Check-in Date:</label>
+                <input type="date" id="checkInDate" name="checkInDate" required>
+                <label for="checkOutDate">Check-out Date:</label>
+                <input type="date" id="checkOutDate" name="checkOutDate" required>
+                <button type="submit">Book Now</button>
+            </form>
+        </section>
+
+        <!-- Booking History Section -->
+        <section id="history">
+            <h2>Booking History</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Room Type</th>
+                        <th>Check-in Date</th>
+                        <th>Check-out Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Booking history will be dynamically filled here -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Check Availability Section -->
+        <section id="availability">
+            <h2>Check Room Availability</h2>
+            <form id="checkAvailabilityForm" method="post" action="/checkAvailability">
+                <label for="availabilityRoomType">Room Type:</label>
+                <select id="availabilityRoomType" name="roomType" required>
+                    <option value="single">Single</option>
+                    <option value="double">Double</option>
+                    <option value="suite">Suite</option>
+                    <option value="deluxe">Deluxe</option>
+                </select>
+                <label for="availabilityCheckInDate">Check-in Date:</label>
+                <input type="date" id="availabilityCheckInDate" name="checkInDate" required>
+                <button type="submit">Check Availability</button>
+            </form>
+        </section>
+
+        <!-- Admin Panel Section -->
+        <section id="admin">
+            <h2>Admin Panel</h2>
+
+            <!-- Room Management -->
+            <section id="roomManagement">
+                <h3>Room Management</h3>
+                <form id="roomManagementForm" method="post" action="/admin/rooms">
+                    <label for="adminRoomType">Room Type:</label>
+                    <select id="adminRoomType" name="roomType" required>
+                        <option value="single">Single</option>
+                        <option value="double">Double</option>
+                        <option value="suite">Suite</option>
+                        <option value="deluxe">Deluxe</option>
+                    </select>
+                    <label for="adminRoomQuantity">Quantity:</label>
+                    <input type="number" id="adminRoomQuantity" name="quantity" required>
+                    <label for="adminRoomPrice">Price:</label>
+                    <input type="number" id="adminRoomPrice" name="price" required>
+                    <button type="submit">Update Room</button>
+                </form>
+            </section>
+
+            <!-- Booking Management -->
+            <section id="bookingManagement">
+                <h3>Booking Management</h3>
+                <form id="bookingManagementForm" method="post" action="/admin/bookings">
+                    <label for="bookingId">Booking ID:</label>
+                    <input type="text" id="bookingId" name="bookingId" required>
+                    <button type="submit">Edit Booking</button>
+                    <button type="submit" form="bookingManagementForm" formaction="/admin/cancelBooking">Cancel Booking</button>
+                </form>
+            </section>
+
+            <!-- Page Management -->
+            <section id="pageManagement">
+                <h3>Page Management</h3>
+                <form id="pageManagementForm" method="post" action="/admin/pages">
+                    <label for="pageName">Page Name:</label>
+                    <select id="pageName" name="pageName" required>
+                        <option value="about">About Us</option>
+                        <option value="contact">Contact Us</option>
+                        <option value="faq">Customer Service Q&A</option>
+                        <option value="guide">Local Travel Guide</option>
+                        <option value="privacy">Privacy Policy</option>
+                    </select>
+                    <label for="pageContent">Content:</label>
+                    <textarea id="pageContent" name="pageContent" rows="10" required></textarea>
+                    <button type="submit">Update Page</button>
+                </form>
+            </section>
+        </section>
+
+        <!-- Static Pages Section -->
+        <section id="about">
+            <h2>About Us</h2>
+            <p>Welcome to our hotel! We offer the best services and rooms for your comfort.</p>
+        </section>
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <p>Email: contact@hotelbooking.com | Phone: (123) 456-7890</p>
+        </section>
+        <section id="faq">
+            <h2>Customer Service Q&A</h2>
+            <p>Frequently asked questions will be listed here.</p>
+        </section>
+        <section id="guide">
+            <h2>Local Travel Guide</h2>
+            <p>Information about local attractions and transportation.</p>
+        </section>
+        <section id="privacy">
+            <h2>Privacy Policy</h2>
+            <p>Details about our privacy practices.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Hotel Booking. All rights reserved.</p>
+    </footer>
+</body>
+</html>
